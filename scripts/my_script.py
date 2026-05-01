@@ -1,6 +1,7 @@
 import datetime
 import sqlite3
 import os
+import time
 
 DB_PATH = "/opt/trailbase/traildepot/data/main.db"
 
@@ -9,7 +10,6 @@ def main():
     print(f"[{now}] Running betting script...")
     
     try:
-        # For GitHub Actions, use a different path or skip DB
         if os.path.exists(DB_PATH):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
@@ -27,4 +27,6 @@ def main():
         print(f"❌ Error: {e}")
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()
+        time.sleep(60)
